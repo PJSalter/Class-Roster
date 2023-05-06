@@ -1,2 +1,4 @@
-package dao;public interface classRosterDao {
+package dao;
+
+public interface classRosterDao {
 }
