@@ -1,2 +1,4 @@
-package dto;public class Student {
+package dto;
+
+public class Student {
 }

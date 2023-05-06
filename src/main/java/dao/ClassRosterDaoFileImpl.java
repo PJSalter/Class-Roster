@@ -1,2 +1,4 @@
-package dao;public class ClassRosterDaoFileImpl {
+package dao;
+
+public class ClassRosterDaoFileImpl {
 }
