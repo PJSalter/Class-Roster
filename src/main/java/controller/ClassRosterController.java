@@ -2,6 +2,7 @@ package controller;
 
 import dao.ClassRosterDaoFileImpl;
 import dao.classRosterDao;
+import dto.Student;
 import ui.ClassRosterView;
 import ui.UserIO;
 import ui.UserIOConsoleImpl;
@@ -57,4 +58,13 @@ public class ClassRosterController {
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
+
+    private void createStudent() {
+        view.displayCreateStudentBanner();
+        Student newStudent = view.getNewStudentInfo();
+        dao.addStudent(newStudent.getStudentId(), newStudent);
+        view.displayCreateSuccessBanner();
+    }
+
+
 }
