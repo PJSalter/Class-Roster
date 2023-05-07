@@ -2,12 +2,18 @@ package dao;
 
 import dto.Student;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClassRosterDaoFileImpl implements classRosterDao {
+
+    private Map<String, Student> students = new HashMap<>();
+
     @Override
     public Student addStudent(String studentId, Student student) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Student prevStudent = students.put(studentId, student);
+        return prevStudent;
     }
 
     @Override
