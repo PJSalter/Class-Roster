@@ -47,7 +47,7 @@ public class ClassRosterController {
 
             switch (menuSelection) {
                 case 1:
-                    io.print("LIST STUDENTS");
+                    listStudents();
                     break;
                 case 2:
                     createStudent();
