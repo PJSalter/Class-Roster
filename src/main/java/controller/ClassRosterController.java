@@ -28,6 +28,13 @@ public class ClassRosterController {
         view.displayCreateSuccessBanner();
     }
 
+    private void removeStudent(){
+        view.displayRemoveStudentBanner();
+        String studentId = view.getStudentIdChoice();
+        Student removedStudent = dao.removeStudent(studentId);
+        view.displayRemoveResult(removedStudent);
+    }
+
     public void run() {
         boolean KeepGoing = true;
         int menuSelection = 0;
@@ -79,13 +86,6 @@ public class ClassRosterController {
         String studentId = view.getStudentIdChoice();
         Student student = dao.getStudent(studentId);
         view.displayStudent(student);
-    }
-
-    private void removeStudent(){
-        view.displayRemoveStudentBanner();
-        String studentId = view.getStudentIdChoice();
-        Student removedStudent = dao.removeStudent(studentId);
-        view.displayRemoveResult(removedStudent);
     }
 
 }
