@@ -91,4 +91,8 @@ public class ClassRosterView {
         io.print("Good Bye!!!");
     }
 
+    public void displayUnknownCommandBanner(){
+        io.print("Unknown Command!!!");
+    }
+
 }
