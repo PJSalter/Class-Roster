@@ -24,7 +24,7 @@ public class ClassRosterDaoFileImpl implements classRosterDao {
 
     @Override
     public Student getStudent(String studentId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return students.get(studentId);
     }
 
     @Override
