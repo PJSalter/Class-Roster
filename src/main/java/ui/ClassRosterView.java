@@ -34,6 +34,15 @@ public class ClassRosterView {
         return currentStudent;
     }
 
+    public void displayCreateSuccessBanner() {
+        io.readString(
+                "Student successfully created.  Please hit enter to continue");
+    }
+
+    public void displayDisplayAllBanner() {
+        io.print("=== Display All Students ===");
+    }
+
     public void displayStudentList(List<Student> studentList) {
         for (Student currentStudent : studentList) {
             String studentInfo = String.format("#%s : %s %s",
@@ -43,12 +52,5 @@ public class ClassRosterView {
             io.print(studentInfo);
         }
         io.readString("Please hit enter to continue.");
-    }
-
-
-
-    public void displayCreateSuccessBanner() {
-        io.readString(
-                "Student successfully created.  Please hit enter to continue");
     }
 }
