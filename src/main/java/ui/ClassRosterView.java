@@ -2,6 +2,8 @@ package ui;
 
 import dto.Student;
 
+import java.util.List;
+
 public class ClassRosterView {
     private UserIO io = new UserIOConsoleImpl();
 
@@ -31,6 +33,19 @@ public class ClassRosterView {
         currentStudent.setCohort(cohort);
         return currentStudent;
     }
+
+    public void displayStudentList(List<Student> studentList) {
+        for (Student currentStudent : studentList) {
+            String studentInfo = String.format("#%s : %s %s",
+                    currentStudent.getStudentId(),
+                    currentStudent.getFirstName(),
+                    currentStudent.getLastName());
+            io.print(studentInfo);
+        }
+        io.readString("Please hit enter to continue.");
+    }
+
+
 
     public void displayCreateSuccessBanner() {
         io.readString(
