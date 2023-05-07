@@ -77,12 +77,12 @@ public class ClassRosterController {
                     KeepGoing = false;
                     break;
                 default:
-                    io.print("UNKNOWN COMMAND");
+                    unknownCommand();
             }
 
 
         }
-        io.print("GOOD BYE");
+        exitMessage();
     }
 
     private int getMenuSelection() {
