@@ -35,6 +35,14 @@ public class ClassRosterController {
         view.displayRemoveResult(removedStudent);
     }
 
+    private void unknownCommand(){
+        view.displayUnknownCommandBanner();
+    }
+
+    private void exitMessage(){
+        view.displayExitBanner();
+    }
+
     public void run() {
         boolean KeepGoing = true;
         int menuSelection = 0;
