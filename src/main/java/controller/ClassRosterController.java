@@ -1,11 +1,15 @@
 package controller;
 
+import dao.ClassRosterDaoFileImpl;
+import dao.classRosterDao;
 import ui.ClassRosterView;
 import ui.UserIO;
 import ui.UserIOConsoleImpl;
 
 public class ClassRosterController {
    private ClassRosterView view = new ClassRosterView();
+
+    private classRosterDao dao = new ClassRosterDaoFileImpl();
     private UserIO io = new UserIOConsoleImpl();
 
     public void run() {
