@@ -10,10 +10,18 @@ import ui.UserIOConsoleImpl;
 import java.util.List;
 
 public class ClassRosterController {
-   private ClassRosterView view = new ClassRosterView();
+   private ClassRosterView view;
 
-    private classRosterDao dao = new ClassRosterDaoFileImpl();
+    private classRosterDao dao;
+
+    public ClassRosterController(classRosterDao dao, ClassRosterView view) {
+        this.dao = dao;
+        this.view = view;
+    }
+
     private UserIO io = new UserIOConsoleImpl();
+
+
 
     private void listStudents() {
         view.displayDisplayAllBanner();
