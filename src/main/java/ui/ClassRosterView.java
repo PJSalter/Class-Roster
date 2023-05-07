@@ -16,6 +16,10 @@ public class ClassRosterView {
         return io.readInt("Please select from the above choices.", 1, 5);
     }
 
+    public void displayCreateStudentBanner() {
+        io.print("=== Create Student ===");
+    }
+
     public Student getNewStudentInfo() {
         String studentId = io.readString("Please enter Student ID");
         String firstName = io.readString("Please enter First Name");
@@ -26,5 +30,10 @@ public class ClassRosterView {
         currentStudent.setLastName(lastName);
         currentStudent.setCohort(cohort);
         return currentStudent;
+    }
+
+    public void displayCreateSuccessBanner() {
+        io.readString(
+                "Student successfully created.  Please hit enter to continue");
     }
 }
