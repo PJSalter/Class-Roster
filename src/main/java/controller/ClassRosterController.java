@@ -81,4 +81,11 @@ public class ClassRosterController {
         view.displayStudent(student);
     }
 
+    private void removeStudent(){
+        view.displayRemoveStudentBanner();
+        String studentId = view.getStudentIdChoice();
+        Student removedStudent = dao.removeStudent(studentId);
+        view.displayRemoveResult(removedStudent);
+    }
+
 }
