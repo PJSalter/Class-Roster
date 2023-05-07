@@ -7,11 +7,19 @@ import ui.ClassRosterView;
 import ui.UserIO;
 import ui.UserIOConsoleImpl;
 
+import java.util.List;
+
 public class ClassRosterController {
    private ClassRosterView view = new ClassRosterView();
 
     private classRosterDao dao = new ClassRosterDaoFileImpl();
     private UserIO io = new UserIOConsoleImpl();
+
+    private void listStudents() {
+        view.displayDisplayAllBanner();
+        List<Student> studentList = dao.getAllStudents();
+        view.displayStudentList(studentList);
+    }
 
     private void createStudent() {
         view.displayCreateStudentBanner();
