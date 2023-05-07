@@ -13,6 +13,13 @@ public class ClassRosterController {
     private classRosterDao dao = new ClassRosterDaoFileImpl();
     private UserIO io = new UserIOConsoleImpl();
 
+    private void createStudent() {
+        view.displayCreateStudentBanner();
+        Student newStudent = view.getNewStudentInfo();
+        dao.addStudent(newStudent.getStudentId(), newStudent);
+        view.displayCreateSuccessBanner();
+    }
+
     public void run() {
         boolean KeepGoing = true;
         int menuSelection = 0;
@@ -35,7 +42,7 @@ public class ClassRosterController {
                     io.print("LIST STUDENTS");
                     break;
                 case 2:
-                    io.print("CREATE STUDENT");
+                    createStudent();
                     break;
                 case 3:
                     io.print("VIEW STUDENT");
@@ -58,13 +65,5 @@ public class ClassRosterController {
     private int getMenuSelection() {
         return view.printMenuAndGetSelection();
     }
-
-    private void createStudent() {
-        view.displayCreateStudentBanner();
-        Student newStudent = view.getNewStudentInfo();
-        dao.addStudent(newStudent.getStudentId(), newStudent);
-        view.displayCreateSuccessBanner();
-    }
-
 
 }
