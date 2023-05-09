@@ -62,12 +62,13 @@ public class ClassRosterController {
         view.displayExitBanner();
     }
 
-    public void run() throws ClassRosterDaoException {
+    public void run() {
         boolean KeepGoing = true;
         int menuSelection = 0;
-        while (KeepGoing) {
+        try {
+            while (KeepGoing) {
 
-            menuSelection = getMenuSelection();
+                menuSelection = getMenuSelection();
 
 //            io.print("Main Menu");
 //            io.print("1. List Student IDs");
@@ -79,29 +80,32 @@ public class ClassRosterController {
 //            menuSelection = io.readInt("Please select from the"
 //                    + " above choices.", 1, 5);
 
-            switch (menuSelection) {
-                case 1:
-                    listStudents();
-                    break;
-                case 2:
-                    createStudent();
-                    break;
-                case 3:
-                    viewStudent();
-                    break;
-                case 4:
-                    removeStudent();
-                    break;
-                case 5:
-                    KeepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
+                switch (menuSelection) {
+                    case 1:
+                        listStudents();
+                        break;
+                    case 2:
+                        createStudent();
+                        break;
+                    case 3:
+                        viewStudent();
+                        break;
+                    case 4:
+                        removeStudent();
+                        break;
+                    case 5:
+                        KeepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
+
+
             }
-
-
+            exitMessage();
+        } catch (ClassRosterDaoException e) {
+            view.displayErrorMessage(e.getMessage());
         }
-        exitMessage();
     }
 
 }
