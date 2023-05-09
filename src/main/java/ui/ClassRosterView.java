@@ -11,6 +11,11 @@ public class ClassRosterView {
         this.io = io;
     }
 
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
+
     public int printMenuAndGetSelection() {
         io.print("Main Menu");
         io.print("1. List Students");
