@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ClassRosterDaoException;
 import dao.ClassRosterDaoFileImpl;
 import dao.classRosterDao;
 import dto.Student;
@@ -7,25 +8,67 @@ import ui.ClassRosterView;
 import ui.UserIO;
 import ui.UserIOConsoleImpl;
 
-public class ClassRosterController {
-   private ClassRosterView view = new ClassRosterView();
+import java.util.List;
 
-    private classRosterDao dao = new ClassRosterDaoFileImpl();
+public class ClassRosterController {
+   private ClassRosterView view;
+
+    private classRosterDao dao;
+
+    public ClassRosterController(classRosterDao dao, ClassRosterView view) {
+        this.dao = dao;
+        this.view = view;
+    }
+
     private UserIO io = new UserIOConsoleImpl();
 
-    private void createStudent() {
+    private int getMenuSelection() {
+
+        return view.printMenuAndGetSelection();
+    }
+
+    private void createStudent() throws ClassRosterDaoException {
         view.displayCreateStudentBanner();
         Student newStudent = view.getNewStudentInfo();
         dao.addStudent(newStudent.getStudentId(), newStudent);
         view.displayCreateSuccessBanner();
     }
 
+    private void listStudents() throws ClassRosterDaoException {
+        view.displayDisplayAllBanner();
+        List<Student> studentList = dao.getAllStudents();
+        view.displayStudentList(studentList);
+    }
+
+    private void viewStudent() throws ClassRosterDaoException {
+        view.displayDisplayStudentBanner();
+        String studentId = view.getStudentIdChoice();
+        Student student = dao.getStudent(studentId);
+        view.displayStudent(student);
+    }
+
+    private void removeStudent() throws ClassRosterDaoException {
+        view.displayRemoveStudentBanner();
+        String studentId = view.getStudentIdChoice();
+        Student removedStudent = dao.removeStudent(studentId);
+        view.displayRemoveResult(removedStudent);
+    }
+
+    private void unknownCommand(){
+        view.displayUnknownCommandBanner();
+    }
+
+    private void exitMessage(){
+        view.displayExitBanner();
+    }
+
     public void run() {
         boolean KeepGoing = true;
         int menuSelection = 0;
-        while (KeepGoing) {
+        try {
+            while (KeepGoing) {
 
-            menuSelection = getMenuSelection();
+                menuSelection = getMenuSelection();
 
 //            io.print("Main Menu");
 //            io.print("1. List Student IDs");
@@ -37,33 +80,32 @@ public class ClassRosterController {
 //            menuSelection = io.readInt("Please select from the"
 //                    + " above choices.", 1, 5);
 
-            switch (menuSelection) {
-                case 1:
-                    io.print("LIST STUDENTS");
-                    break;
-                case 2:
-                    createStudent();
-                    break;
-                case 3:
-                    io.print("VIEW STUDENT");
-                    break;
-                case 4:
-                    io.print("REMOVE STUDENT");
-                    break;
-                case 5:
-                    KeepGoing = false;
-                    break;
-                default:
-                    io.print("UNKNOWN COMMAND");
+                switch (menuSelection) {
+                    case 1:
+                        listStudents();
+                        break;
+                    case 2:
+                        createStudent();
+                        break;
+                    case 3:
+                        viewStudent();
+                        break;
+                    case 4:
+                        removeStudent();
+                        break;
+                    case 5:
+                        KeepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
+
+
             }
-
-
+            exitMessage();
+        } catch (ClassRosterDaoException e) {
+            view.displayErrorMessage(e.getMessage());
         }
-        io.print("GOOD BYE");
-    }
-
-    private int getMenuSelection() {
-        return view.printMenuAndGetSelection();
     }
 
 }
