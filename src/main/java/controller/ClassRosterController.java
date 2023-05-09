@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ClassRosterDaoException;
 import dao.ClassRosterDaoFileImpl;
 import dao.classRosterDao;
 import dto.Student;
@@ -21,22 +22,32 @@ public class ClassRosterController {
 
     private UserIO io = new UserIOConsoleImpl();
 
+    private int getMenuSelection() {
 
-
-    private void listStudents() {
-        view.displayDisplayAllBanner();
-        List<Student> studentList = dao.getAllStudents();
-        view.displayStudentList(studentList);
+        return view.printMenuAndGetSelection();
     }
 
-    private void createStudent() {
+    private void createStudent() throws ClassRosterDaoException {
         view.displayCreateStudentBanner();
         Student newStudent = view.getNewStudentInfo();
         dao.addStudent(newStudent.getStudentId(), newStudent);
         view.displayCreateSuccessBanner();
     }
 
-    private void removeStudent(){
+    private void listStudents() throws ClassRosterDaoException {
+        view.displayDisplayAllBanner();
+        List<Student> studentList = dao.getAllStudents();
+        view.displayStudentList(studentList);
+    }
+
+    private void viewStudent() throws ClassRosterDaoException {
+        view.displayDisplayStudentBanner();
+        String studentId = view.getStudentIdChoice();
+        Student student = dao.getStudent(studentId);
+        view.displayStudent(student);
+    }
+
+    private void removeStudent() throws ClassRosterDaoException {
         view.displayRemoveStudentBanner();
         String studentId = view.getStudentIdChoice();
         Student removedStudent = dao.removeStudent(studentId);
@@ -51,7 +62,7 @@ public class ClassRosterController {
         view.displayExitBanner();
     }
 
-    public void run() {
+    public void run() throws ClassRosterDaoException {
         boolean KeepGoing = true;
         int menuSelection = 0;
         while (KeepGoing) {
@@ -91,17 +102,6 @@ public class ClassRosterController {
 
         }
         exitMessage();
-    }
-
-    private int getMenuSelection() {
-        return view.printMenuAndGetSelection();
-    }
-
-    private void viewStudent() {
-        view.displayDisplayStudentBanner();
-        String studentId = view.getStudentIdChoice();
-        Student student = dao.getStudent(studentId);
-        view.displayStudent(student);
     }
 
 }
